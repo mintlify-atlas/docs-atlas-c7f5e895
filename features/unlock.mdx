@@ -1,0 +1,33 @@
+---
+title: "Steamtools Unlock Toggle: Deploy xinput1_4.dll Hook"
+description: "The Unlock checkbox writes or removes a proxy xinput1_4.dll from your Steam directory. The DLL is bundled inside the Steamtools binary at compile time."
+---
+
+The **Unlock** checkbox in the main toolbar deploys or removes `xinput1_4.dll` — a proxy DLL that intercepts Steam calls — from your Steam installation directory. Checking the box writes the file; unchecking it removes the file.
+
+<Warning>
+**Use this feature at your own risk.** The author accepts no responsibility for any consequences arising from the use of this feature. Deploying a hook DLL into your Steam directory may violate Steam's terms of service or affect system stability. Understand what you are doing before enabling Unlock.
+</Warning>
+
+## How it works
+
+The `xinput1_4.dll` file is embedded directly inside the Steamtools binary at compile time. No separate download is required.
+
+| Checkbox state | Action |
+|----------------|--------|
+| **Checked** | Writes `xinput1_4.dll` to `<SteamPath>\xinput1_4.dll` |
+| **Unchecked** | Deletes `<SteamPath>\xinput1_4.dll` |
+
+The change takes effect the moment you toggle the checkbox — there is no confirmation prompt.
+
+## What xinput1_4.dll does
+
+`xinput1_4.dll` is a proxy DLL. When Steam loads it, the DLL sits between Steam and the real Windows XInput library and can intercept or modify Steam's function calls. This is the mechanism that enables Steamtools' core unlocking functionality.
+
+<Note>
+The DLL is bundled inside the Steamtools executable itself (`include_bytes!` at compile time). You do not need to place any additional files on disk.
+</Note>
+
+## Unlock state persistence
+
+The state of the **Unlock** checkbox is saved across sessions. When you relaunch Steamtools, the checkbox restores its previous value, but the DLL file is **not** re-written automatically on startup — only toggling the checkbox triggers a write or delete.

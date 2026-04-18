@@ -1,0 +1,85 @@
+---
+title: 'Steamtools Lua Plugin API: Write Scripts for the App'
+description: 'Write Lua 5.4 scripts that run inside Steamtools to automate and extend its functionality, with access to all standard Lua libraries and custom globals.'
+---
+
+The Lua Plugin API lets you write scripts that execute directly within Steamtools. Scripts have full access to the Lua 5.4 standard library as well as Steamtools-specific global functions for tasks like downloading files from the internet.
+
+## Lua version
+
+Steamtools embeds the **Lua 5.4** runtime (compiled from C source). All Lua 5.4 language features are available.
+
+## Available libraries
+
+All standard Lua libraries are loaded automatically via `luaL_openlibs`. You can use:
+
+| Library | Purpose |
+|---------|---------|
+| `io` | File input and output |
+| `os` | Operating system utilities, time, dates |
+| `string` | String manipulation and pattern matching |
+| `table` | Table manipulation |
+| `math` | Mathematical functions |
+| `coroutine` | Coroutine support |
+| `package` | Module loading |
+| `utf8` | UTF-8 string utilities |
+| `debug` | Debug facilities |
+
+In addition to the standard library, Steamtools exposes its own [global functions](/lua-api/globals) such as `download()`.
+
+## Where scripts live
+
+Place all plugin scripts in the `plugins/` directory, located in the same folder as the Steamtools executable. Scripts must use the `.lua` file extension.
+
+```
+steamtools/
+├── stcli.exe
+└── plugins/
+    ├── my-script.lua
+    └── another-plugin.lua
+```
+
+Steamtools creates the `plugins/` directory automatically on first launch if it does not already exist.
+
+## Running a script
+
+<Steps>
+  <Step title="Open the Plugins window">
+    Launch Steamtools and open the **Plugins** window from the main interface.
+  </Step>
+  <Step title="Add a plugin">
+    If no plugins exist yet, click **Add new plugin** to create a new `.lua` file inside the `plugins/` directory.
+  </Step>
+  <Step title="Start the script">
+    Click **Start** next to the plugin you want to run. The script executes in a background thread. Click **Stop** to halt execution.
+  </Step>
+</Steps>
+
+<Note>
+  Only one script runs at a time. Starting a new script while another is running may cause unexpected behavior.
+</Note>
+
+## Hello world
+
+Here is a minimal plugin to verify your setup is working:
+
+```lua
+-- plugins/hello.lua
+print("Hello from Steamtools!")
+
+local name = "world"
+print("Hello, " .. name .. "!")
+```
+
+When you click **Start**, output from `print()` goes to the standard output of the Steamtools process.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Global functions" icon="function" href="/lua-api/globals">
+    Full reference for Steamtools-specific globals like `download()`.
+  </Card>
+  <Card title="Built-in code editor" icon="code" href="/lua-api/code-editor">
+    Learn how to use the integrated Lua editor with syntax highlighting.
+  </Card>
+</CardGroup>

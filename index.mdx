@@ -1,97 +1,62 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Steamtools: Steam Lua Manifest Manager for Windows"
+description: "Steamtools is a lightweight desktop tool built in Rust for viewing, installing, and removing Steam Lua Manifests to manage your game library."
 ---
 
-## Setting up
+Steamtools is a fast, open-source desktop application written in Rust that lets you manage Steam Lua Manifests directly from a clean GUI. Browse your manifest library, install new manifests by app ID, remove them when needed, and unlock games — all without touching the command line.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Installation" icon="download" href="/installation">
+    Download Steamtools and get it running on Windows in minutes.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Set up Steam path, load your first Lua manifest, and explore the game list.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Manifest Management" icon="file-code" href="/guides/manifest-management">
+    Learn how Lua Manifests work and how Steamtools manages them.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Lua Plugin API" icon="plug" href="/lua-api/overview">
+    Write and run Lua plugins with built-in syntax highlighting and execution control.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What you can do with Steamtools
 
-Everything you need to create world-class documentation.
+<CardGroup cols={2}>
+  <Card title="Browse manifests" icon="list" href="/guides/manifest-management">
+    View all installed Lua Manifests in a visual grid with Steam header images.
+  </Card>
+  <Card title="Install by app ID" icon="circle-plus" href="/guides/installing-games">
+    Download manifests from ManifestHub with a single app ID lookup.
+  </Card>
+  <Card title="Remove manifests" icon="trash" href="/guides/removing-games">
+    Remove individual manifests from your Steam config with one click.
+  </Card>
+  <Card title="Run Lua plugins" icon="code" href="/features/plugins">
+    Create, edit, and execute Lua scripts with the built-in code editor.
+  </Card>
+  <Card title="MelonLoader mods" icon="puzzle-piece" href="/features/mods">
+    Install MelonLoader and copy mod DLLs to your game directory automatically.
+  </Card>
+  <Card title="Unlock toggle" icon="lock-open" href="/features/unlock">
+    Deploy or remove the xinput1_4.dll proxy to enable game unlocking.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Get started in three steps
 
-## Need inspiration?
+<Steps>
+  <Step title="Install prerequisites">
+    Install the [Visual C++ Runtime (x64)](https://aka.ms/vs/17/release/vc_redist.x64.exe) and ensure your GPU drivers include OpenGL support.
+  </Step>
+  <Step title="Download and launch Steamtools">
+    Download the latest release from [GitHub](https://github.com/RealViper8/Steamtools/releases) and run `stcli.exe`.
+  </Step>
+  <Step title="Set your Steam path">
+    On first launch, Steamtools asks for your Steam installation directory. Point it at the folder containing `steam.exe` and click **Validate**.
+  </Step>
+</Steps>
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<Note>
+  Steamtools is provided as-is under the MIT license. The author is not responsible for any actions taken using this program.
+</Note>

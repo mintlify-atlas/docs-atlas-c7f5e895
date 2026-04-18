@@ -1,0 +1,68 @@
+---
+title: "Steamtools System Requirements and Prerequisites Guide"
+description: "System requirements for running Steamtools: Windows OS, Visual C++ Runtime x64, and an OpenGL-capable GPU with up-to-date drivers installed."
+---
+
+Before you install Steamtools, make sure your system meets the requirements below. Steamtools is a native desktop application built with the [wgpu](https://wgpu.rs/) renderer, which requires OpenGL support from your GPU drivers and the Visual C++ Runtime from Microsoft.
+
+## Operating system
+
+Steamtools is developed and tested primarily on **Windows**. The build system includes Windows-specific dependencies (`windows-registry`) for automatic Steam path detection from the Windows registry.
+
+<Note>
+  macOS and Linux code paths exist in the source, but Windows is the primary supported platform. Behavior on other operating systems is not guaranteed.
+</Note>
+
+## Required: Visual C++ Runtime x64
+
+Steamtools links against the Microsoft Visual C++ Redistributable. Without it, the application will crash immediately on launch.
+
+<Steps>
+  <Step title="Download the installer">
+    Download the Visual C++ Runtime x64 from Microsoft:
+    [https://aka.ms/vs/17/release/vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+  </Step>
+  <Step title="Run the installer">
+    Open the downloaded `vc_redist.x64.exe` file and follow the prompts to complete installation.
+  </Step>
+  <Step title="Restart if prompted">
+    If the installer asks you to restart your machine, do so before launching Steamtools.
+  </Step>
+</Steps>
+
+## Required: OpenGL-capable GPU drivers
+
+Steamtools uses the wgpu rendering backend, which depends on OpenGL. If your GPU drivers are outdated or missing OpenGL support, you will see a black screen or the application will fail to render.
+
+Download the latest drivers for your GPU manufacturer:
+
+<CardGroup cols={2}>
+  <Card
+    title="AMD drivers"
+    icon="microchip"
+    href="https://www.amd.com/en/support/download/drivers.html"
+  >
+    Download the latest AMD Radeon Software or Adrenalin Edition drivers from the AMD support site.
+  </Card>
+  <Card
+    title="NVIDIA drivers"
+    icon="microchip"
+    href="https://www.nvidia.com/de-de/drivers/"
+  >
+    Download the latest Game Ready or Studio drivers from the NVIDIA driver download page.
+  </Card>
+</CardGroup>
+
+<Tip>
+  If you are on a laptop with integrated Intel graphics, update your Intel graphics driver through Windows Update or the [Intel Driver & Support Assistant](https://www.intel.com/content/www/us/en/support/detect.html).
+</Tip>
+
+## Summary checklist
+
+| Requirement | Details |
+|---|---|
+| Operating system | Windows (primary platform) |
+| Visual C++ Runtime | x64, version 2015–2022 |
+| GPU | Any GPU with OpenGL support |
+| GPU drivers | Up to date AMD, NVIDIA, or Intel drivers |
+| Steam | Installed, with `steam.exe` accessible in its installation folder |

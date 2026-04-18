@@ -1,0 +1,60 @@
+---
+title: "Install Steamtools on Windows: Prerequisites and Setup"
+description: "Install the required prerequisites and download stcli.exe to run Steamtools on Windows. The whole process takes under five minutes."
+---
+
+Steamtools ships as a single executable — `stcli.exe` — with no installer. Before you run it, install two prerequisites so the app renders correctly.
+
+<Warning>
+  Steamtools runs on **Windows only**. macOS and Linux are not supported.
+</Warning>
+
+## Prerequisites
+
+### Visual C++ Runtime (x64)
+
+Steamtools is compiled with MSVC and requires the Microsoft Visual C++ Redistributable to load native libraries at runtime.
+
+Download and run the installer:
+
+<Card title="VC_redist.x64.exe" icon="microsoft" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">
+  Microsoft Visual C++ 2015–2022 Redistributable (x64)
+</Card>
+
+If you have already installed any recent Visual Studio, Visual Studio Code C++ extension, or another MSVC-compiled app, the runtime is likely present already.
+
+### OpenGL drivers
+
+Steamtools renders its GUI through [eframe](https://github.com/emilk/egui/tree/master/crates/eframe) using the GPU. Make sure your graphics drivers are up to date so OpenGL is available.
+
+<CardGroup cols={2}>
+  <Card title="AMD drivers" icon="display" href="https://www.amd.com/en/support/download/drivers.html">
+    Download the latest AMD Adrenalin software for your GPU.
+  </Card>
+  <Card title="NVIDIA drivers" icon="display" href="https://www.nvidia.com/de-de/drivers/">
+    Download the latest NVIDIA Game Ready or Studio drivers.
+  </Card>
+</CardGroup>
+
+## Download Steamtools
+
+<Steps>
+  <Step title="Open the GitHub releases page">
+    Go to [github.com/RealViper8/Steamtools/releases](https://github.com/RealViper8/Steamtools/releases) and find the latest release.
+  </Step>
+  <Step title="Download stcli.exe">
+    Under **Assets**, click `stcli.exe` to download the binary. No installer or archive — just the single executable.
+  </Step>
+  <Step title="Place the file">
+    Move `stcli.exe` to a folder of your choice, for example `C:\Tools\Steamtools\`. Steamtools writes a log file (`steamtools.log`) and an icon cache (`icons\`) next to the executable, so keep it in its own directory.
+  </Step>
+  <Step title="Run stcli.exe">
+    Double-click `stcli.exe` to launch. Windows may show a SmartScreen prompt the first time — click **More info** then **Run anyway** to proceed.
+
+    On first launch you will see the **Setup** screen asking for your Steam installation path. See the [quickstart guide](/quickstart) to complete the initial configuration.
+  </Step>
+</Steps>
+
+<Note>
+  Steamtools does not need to be run as Administrator under normal use. If file operations fail (for example copying a manifest), try running as Administrator.
+</Note>

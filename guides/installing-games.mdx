@@ -1,0 +1,54 @@
+---
+title: 'Download and Install Lua Manifests by Steam App ID'
+description: 'Fetch a Lua Manifest from ManifestHub by entering a Steam App ID in Steamtools, with step-by-step install instructions and error handling guidance.'
+---
+
+Steamtools can fetch a Lua Manifest for any game that exists in the [ManifestHub](https://github.com/SteamAutoCracks/ManifestHub) repository. You provide a Steam App ID, and Steamtools downloads the correct `.lua` file and places it in the right directory automatically.
+
+## Finding a game's App ID
+
+Every game on Steam has a unique numeric App ID. The easiest ways to find it:
+
+- Open the game's Steam Store page in your browser. The URL contains the ID: `https://store.steampowered.com/app/480/Spacewar/` — here the App ID is `480`.
+- Right-click the game in your Steam library, select **Properties**, and look under the **Updates** tab or in the URL of the store page link.
+- Use a site like [SteamDB](https://www.steamdb.info) and search by game name.
+
+## Installing a manifest
+
+<Steps>
+  <Step title="Open the Install popup">
+    Click the **↓ Install** button in the top toolbar. The Install popup appears.
+  </Step>
+  <Step title="Enter the App ID">
+    Type the numeric App ID into the **Appid** field. The field only accepts digits — any non-numeric character is stripped automatically.
+  </Step>
+  <Step title="Click Download">
+    Click **Download**. Steamtools fetches the manifest from:
+
+    ```
+    https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/refs/heads/<appid>/<appid>.lua
+    ```
+
+    If the download succeeds, a confirmation dialog appears and the manifest is saved to `<SteamPath>\config\stplug-in\<appid>.lua`.
+  </Step>
+  <Step title="Game list refreshes">
+    After a successful download, Steamtools automatically reloads the game list. The new game card appears in the Main Menu within a few seconds as the Steam API fetches the header image.
+  </Step>
+</Steps>
+
+## Error scenarios
+
+If the download fails, Steamtools shows a dialog explaining the problem.
+
+| Error | Cause | Resolution |
+|---|---|---|
+| "You already have the game/app!" | A manifest for this App ID already exists in `stplug-in\` | No action needed — the game is already installed |
+| "Couldn't find app in database / invalid appid" | ManifestHub does not have a branch for this App ID, or the App ID is incorrect | Verify the App ID on the Steam Store page; not all games are available in ManifestHub |
+
+## After installation
+
+Once the manifest is installed, the game appears in your Steamtools list. From there you can:
+
+- Click **+ Install** in the right panel to prompt Steam to download and install the game files via `steam://install/<appid>`.
+- Click **🔍 View** to inspect the App ID details.
+- Click **Remove** to delete the manifest if you no longer need it.

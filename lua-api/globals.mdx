@@ -1,0 +1,78 @@
+---
+title: 'Steamtools Lua Global Functions: download() Reference'
+description: 'Full reference for the custom global functions Steamtools registers in every Lua plugin state, including download() for HTTP file retrieval and disk writes.'
+---
+
+Steamtools registers a small set of global functions into every Lua state before your script runs. These functions are available without any `require` call — just call them by name. Standard Lua libraries are also available; see the [API overview](/lua-api/overview) for the full list.
+
+## `download(url, out)`
+
+Downloads a file from the internet and writes it to disk. The function blocks until the download completes or fails.
+
+```lua
+local ok = download(url, out)
+```
+
+### Parameters
+
+<ParamField path="url" type="string" required>
+  The HTTP or HTTPS URL of the resource to download.
+</ParamField>
+
+<ParamField path="out" type="string" default="out">
+  The output file path where the downloaded content is written. If you omit this argument or pass `nil`, the file is saved as `out` in the current working directory.
+</ParamField>
+
+### Return value
+
+Returns a `boolean`:
+
+- `true` — the request succeeded and the file was written to disk.
+- `false` — the request failed (network error, invalid URL, or a non-successful response), or the URL argument was missing.
+
+<Warning>
+  A `true` return value means the HTTP request completed and the response body was written to disk. It does **not** verify the HTTP status code — a `404` response body will still be written and return `true`. Check the content of the output file if the HTTP status matters for your use case.
+</Warning>
+
+### Example
+
+```lua
+-- Download a file from the internet
+local ok = download("https://example.com/file.txt", "output.txt")
+if ok then
+  print("Download successful")
+else
+  print("Download failed")
+end
+```
+
+### Downloading to a specific directory
+
+Make sure the target directory exists before calling `download()`, or the write will fail:
+
+```lua
+-- On Windows, use mkdir to create the directory first
+os.execute("mkdir data 2>nul")
+
+local ok = download("https://example.com/manifest.lua", "data/manifest.lua")
+if ok then
+  print("Manifest saved to data/manifest.lua")
+end
+```
+
+## Autocompletion support
+
+The repository includes a `globals.d.lua` file at the project root with LuaLS-compatible annotations for all Steamtools globals:
+
+```lua
+---Downloads images, text files from the internet using url and output.
+---@param url string
+---@param out string
+download = function(url, out) end
+```
+
+Point your editor's Lua language server at `globals.d.lua` to get autocomplete and inline documentation for `download()` and any future globals as they are added.
+
+<Tip>
+  If you use VS Code with the [Lua language server extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua), add `globals.d.lua` to your workspace so autocomplete works in your plugin scripts.
+</Tip>

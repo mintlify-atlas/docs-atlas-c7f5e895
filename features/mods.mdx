@@ -1,0 +1,84 @@
+---
+title: "Install MelonLoader Mods for Steam Games in Steamtools"
+description: "Install MelonLoader and deploy local .dll mods to any Steam game by entering its App ID — currently experimental and requires a local mods/ folder."
+---
+
+The Mods feature automates MelonLoader installation and mod deployment for your Steam games. Enter a game's App ID, and Steamtools looks up the install path, downloads or launches MelonLoader, and copies the matching `.dll` from your local `mods/` folder into the game's `Mods\` directory. The feature is experimental and must be enabled in Settings before use.
+
+<Warning>
+The Mods feature is experimental. Only local mods stored in a `mods/` folder next to the Steamtools executable are currently supported.
+</Warning>
+
+## Prerequisites
+
+Before using the Mods feature you need:
+
+- A `mods/` folder in the same directory as `stcli.exe`.
+- One `.dll` file inside `mods/` for each game you want to mod.
+- The `.dll` filename must **exactly match** the game's installation directory name (without the `.dll` extension). For example, if the game is installed at `steamapps\common\HollowKnight`, name your file `HollowKnight.dll`.
+
+```
+steamtools/
+├── stcli.exe
+└── mods/
+    └── HollowKnight.dll
+```
+
+<Note>
+The game must appear in the Steamtools game list (it needs a Lua manifest file) so that its install path can be resolved.
+</Note>
+
+## Enable mods
+
+The Mods button is hidden by default. Enable it in Settings first.
+
+<Steps>
+  <Step title="Open Settings">
+    Click the **⚙** button in the top-right corner of the main toolbar.
+  </Step>
+  <Step title="Enable the feature">
+    Check **Mods feature (Experimental)**. The **🔁 Mods** button will appear in the toolbar immediately.
+  </Step>
+  <Step title="Return to the main view">
+    Click **↩ Back** to return to the Main Menu.
+  </Step>
+</Steps>
+
+## Install a mod
+
+<Steps>
+  <Step title="Open the Mods panel">
+    Click **🔁 Mods** in the toolbar.
+  </Step>
+  <Step title="Enter the App ID">
+    Type the numeric Steam App ID of the game into the **APPID** field. You can find the App ID on the game's Steam store page URL.
+  </Step>
+  <Step title="Click Get">
+    Click **Get**. Steamtools looks up the game's install path from cached game data (`steam.bin`).
+
+    - If the cache is empty, Steamtools writes a fresh `steam.bin` file first.
+    - If the App ID is not numeric, a warning dialog appears.
+    - If the game is not found in the cache, an info dialog indicates it is not in your library.
+  </Step>
+</Steps>
+
+## What happens after you click Get
+
+Steamtools performs the following steps automatically:
+
+1. **Resolves the game path** from the cached game data using the App ID.
+2. **Installs MelonLoader** (if not already present):
+   - Creates a `MelonLoader/` directory next to the Steamtools executable.
+   - Downloads `MelonLoader.Installer.exe` from the official MelonLoader GitHub release (`v0.7.1`) into `MelonLoader/Loader.exe`.
+   - Launches the installer.
+   - If `MelonLoader/` already exists, it launches the installer directly without re-downloading.
+3. **Creates the Mods directory** at `<GameInstallPath>\Mods\` (created recursively if it does not exist).
+4. **Copies the matching `.dll`** from your local `mods/` folder into `<GameInstallPath>\Mods\`.
+
+<Note>
+The `.dll` filename must exactly match the game's installation directory name. For example, for a game installed in a directory named `HollowKnight`, the mod file must be `mods\HollowKnight.dll`.
+</Note>
+
+<Warning>
+MelonLoader installation requires an internet connection on first use. The installer is fetched from `https://github.com/LavaGang/MelonLoader/releases/download/v0.7.1/MelonLoader.Installer.exe`.
+</Warning>

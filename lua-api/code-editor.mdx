@@ -1,0 +1,72 @@
+---
+title: 'Steamtools Built-in Lua Code Editor: Editing Plugins'
+description: 'Use the integrated code editor in Steamtools to write and edit Lua plugins with Lua syntax highlighting, the GitHub Dark theme, and Ctrl+S save.'
+---
+
+Steamtools ships a built-in code editor so you can write and modify Lua plugins without leaving the application. The editor opens in a dedicated **Code Editor** window and automatically resizes as you resize that window.
+
+## Opening the editor
+
+<Steps>
+  <Step title="Open the Plugins window">
+    Launch Steamtools and open the **Plugins** window from the main interface.
+  </Step>
+  <Step title="Select a plugin">
+    Your existing plugins appear as cards in the list. If none exist yet, click **Add new plugin** to create a `.lua` file in the `plugins/` directory.
+  </Step>
+  <Step title="Click View/Edit">
+    Click the **View/Edit** button on the plugin card you want to edit. The **Code Editor** window opens.
+  </Step>
+</Steps>
+
+## Editor features
+
+<CardGroup cols={2}>
+  <Card title="Lua syntax highlighting" icon="code">
+    The editor uses tree-sitter-lua for accurate, token-level Lua syntax highlighting.
+  </Card>
+  <Card title="GITHUB_DARK theme" icon="moon">
+    Code is displayed in the GitHub Dark color scheme for comfortable low-light editing.
+  </Card>
+  <Card title="Responsive layout" icon="expand">
+    The editor fills the Code Editor window and adjusts automatically when you resize it.
+  </Card>
+  <Card title="Keyboard shortcut" icon="keyboard">
+    Press **Ctrl+S** at any time to save without reaching for the toolbar.
+  </Card>
+</CardGroup>
+
+## Saving your changes
+
+Click the **Save** button in the editor header, or press **Ctrl+S**. Saving does two things:
+
+1. Renames the file on disk if you changed the plugin name (see below).
+2. Writes the current editor contents to `plugins/<name>.lua`.
+
+<Warning>
+  Closing the Code Editor window **without saving** discards any unsaved changes. Always save before closing.
+</Warning>
+
+## Renaming a plugin
+
+The name field in the editor header shows the current plugin name (without the `.lua` extension). Edit it directly, then press **Ctrl+S** or click **Save**. Steamtools renames the file on disk to match the new name.
+
+## Deleting a plugin
+
+Click the **🗑** (trash) button in the editor header to permanently delete the plugin file from the `plugins/` directory. If it is the only plugin in your list, the Code Editor window closes automatically.
+
+<Warning>
+  Deletion is permanent. The file is removed from disk immediately and cannot be recovered from within Steamtools.
+</Warning>
+
+## Closing the editor
+
+Close the **Code Editor** window using the standard window close button. This hides the editor without affecting your other open windows in Steamtools.
+
+## Using an external editor
+
+The built-in editor is convenient for quick edits, but you can also use any external editor. Your scripts are plain `.lua` files in the `plugins/` directory — open them with any text editor or IDE you prefer.
+
+<Tip>
+  For richer autocomplete, open `globals.d.lua` (included in the Steamtools repository) alongside your plugin in an editor that supports the Lua language server. You will get inline docs and type hints for Steamtools globals like `download()`. See the [global functions reference](/lua-api/globals) for details.
+</Tip>

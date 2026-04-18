@@ -1,0 +1,78 @@
+{
+  "projectType": "cli-tool",
+  "projectName": "Steamtools",
+  "projectDescription": "A lightweight desktop GUI tool written in Rust for viewing, installing, and removing Steam Lua Manifests to manage game unlocks.",
+  "theme": "palm",
+  "primaryColor": "#94cb04",
+  "lightColor": "#545454",
+  "darkColor": null,
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": [
+          "introduction",
+          "installation",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Using Steamtools",
+        "pages": [
+          "guides/manifest-management",
+          "guides/installing-games",
+          "guides/removing-games",
+          "guides/search-and-filter"
+        ]
+      },
+      {
+        "group": "Features",
+        "pages": [
+          "features/plugins",
+          "features/mods",
+          "features/settings",
+          "features/unlock"
+        ]
+      },
+      {
+        "group": "Lua Plugin API",
+        "pages": [
+          "lua-api/overview",
+          "lua-api/globals",
+          "lua-api/code-editor"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "reference/prerequisites",
+          "reference/troubleshooting",
+          "reference/changelog"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "View Lua Manifests for Steam games with header images fetched from Steam API",
+    "Install Lua manifests by app ID from the ManifestHub repository",
+    "Remove Lua manifests to revoke game access",
+    "Install/Uninstall games via Steam protocol URLs",
+    "Search and filter games by name or app ID",
+    "Lua Plugin system with built-in code editor (syntax highlighting)",
+    "MelonLoader mod integration for supported games",
+    "Unlock toggle via xinput1_4.dll proxy DLL injection",
+    "Persistent settings and state across sessions"
+  ],
+  "publicApiSurface": [
+    "get_games(path, current_games) -> HashMap<u32, Game>",
+    "install_melonloader(path, melon_loader) -> Option<()>",
+    "Steam::new(path) -> Steam",
+    "Game::new() -> Game",
+    "st::run_lua_file(filename) -> Option<()>",
+    "st::start_file()",
+    "st::stop_file()",
+    "download(url, out) [Lua global]",
+    "STEAM_URL constant",
+    "STEAM_APPLIST_URL constant"
+  ]
+}

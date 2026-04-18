@@ -1,0 +1,48 @@
+---
+title: 'Search and Filter the Steamtools Game Manifest List'
+description: 'Filter your manifest list by App ID or game name prefix, clear filters with the × button, and use the Fetch button to manually refresh the game grid.'
+---
+
+The Main Menu search bar lets you quickly narrow down your game list without scrolling through every card. You can filter by exact App ID or by game name prefix — Steamtools switches modes automatically based on what you type.
+
+## Using the search bar
+
+The search bar sits at the top of the Main Menu, just below the toolbar.
+
+<Tip>
+  Press **Tab** at any time to move keyboard focus directly to the search bar, so you can start typing without clicking.
+</Tip>
+
+### Filter by App ID
+
+Type a number into the search bar. Steamtools treats a purely numeric input as an App ID and shows only the game with that exact ID. For example, typing `480` shows only the game with App ID 480.
+
+### Filter by game name
+
+Type any text that is not a number. Steamtools performs a case-insensitive prefix match against all game names in your list. For example, typing `half` matches "Half-Life", "Half-Life 2", and any other game whose name starts with "half".
+
+The filter updates live as you type — there is no need to press **Enter**.
+
+## Clearing the filter
+
+Click the **×** button next to the search bar to clear the input and return to the full unfiltered game list. You can also manually delete the text in the search bar; when the field is empty, Steamtools removes the active filter automatically.
+
+## Filter states
+
+Internally, Steamtools tracks one of three filter states at any time:
+
+| State | When active |
+|---|---|
+| None | Search bar is empty — all games are shown |
+| Id | A numeric value is entered — exact App ID match |
+| Name | Text is entered — case-insensitive prefix match on game name |
+
+## Refreshing the game list
+
+If your game list does not update after installing or removing a manifest, click the **🔃 Fetch** button in the toolbar. This forces Steamtools to re-scan the `config\stplug-in\` directory and re-fetch any missing game data from the Steam API.
+
+Use **Fetch** when:
+
+- A newly installed manifest does not appear as a card.
+- A removed game card is still visible.
+- A game card shows a blank image (the icon download may have failed previously).

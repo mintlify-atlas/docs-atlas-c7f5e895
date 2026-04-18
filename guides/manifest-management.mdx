@@ -1,0 +1,57 @@
+---
+title: 'How Steamtools Manages Steam Lua Manifests Explained'
+description: 'Learn what Lua Manifests are, how Steamtools scans and tracks them, and how game cards are populated from the Steam API and your local steamapps folder.'
+---
+
+Steamtools is built around Steam Lua Manifests — small `.lua` files that unlock a game for your Steam account. Every feature in the app revolves around reading, adding, and removing these files. This page explains how the manifest system works so you understand what Steamtools is doing under the hood.
+
+## What is a Lua Manifest?
+
+A Lua Manifest is a `.lua` file that Steam reads to recognize a game as licensed on your account. Each manifest corresponds to exactly one game, identified by its **Steam App ID**.
+
+The filename must match the App ID exactly. For example, the manifest for the game with App ID `480` must be named `480.lua`. If the filename does not match a valid numeric App ID, Steamtools will skip the file and show a warning.
+
+<Note>
+  Manifests are stored in `<SteamPath>\config\stplug-in\`. On a default Windows installation, the full path is `C:\Program Files (x86)\Steam\config\stplug-in\`.
+</Note>
+
+## How Steamtools scans manifests
+
+When Steamtools loads (or after you trigger a refresh), it reads every file in the `config\stplug-in\` directory. For each file:
+
+1. It parses the filename as a numeric App ID.
+2. It calls the Steam API (`https://store.steampowered.com/api/appdetails?appids=<id>`) to fetch the game name and header image.
+3. It caches the header image locally as `icons/<appid>.jpg`. On subsequent loads, the cached image is used and the API is not called again.
+4. It checks `steamapps\appmanifest_<id>.acf` to determine whether the game is currently installed on your machine.
+
+## How game cards are displayed
+
+Each game in the Main Menu appears as a card showing the game's header image. The image is loaded from the local `icons/` cache. If a game shows a blank card, it means the image download failed during a previous scan — click **🔃 Fetch** in the toolbar to retry.
+
+The right panel shows the selected game's name, App ID, and whether it is installed. The **+ Install** and **🗑 Uninstall** buttons in the panel are shown based on that installed status.
+
+## File naming convention
+
+Every manifest file must follow this convention:
+
+- **Filename:** the Steam App ID with no leading zeros
+- **Extension:** `.lua`
+- **Example:** `480.lua` for [Spacewar](https://store.steampowered.com/app/480)
+
+Any file with a non-numeric name is ignored by Steamtools.
+
+## Loading a manifest manually
+
+If you already have a `.lua` file and want to add it to Steamtools without downloading from ManifestHub, use the **Load lua** button in the toolbar.
+
+<Steps>
+  <Step title="Click Load lua">
+    Click **Load lua** in the top toolbar. A file picker opens filtered to `.lua` files.
+  </Step>
+  <Step title="Select your file">
+    Select one or more `.lua` files. Steamtools copies them into `config\stplug-in\`, preserving the original filename (which must be the App ID).
+  </Step>
+  <Step title="Refresh the list">
+    After copying, Steamtools triggers a reload automatically. Your game cards update to reflect the newly added manifests.
+  </Step>
+</Steps>

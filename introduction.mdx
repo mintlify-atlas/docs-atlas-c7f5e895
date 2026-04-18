@@ -1,0 +1,49 @@
+---
+title: "What is Steamtools? Lua Manifest Manager for Steam"
+description: "Steamtools is a lightweight Rust desktop app for viewing, installing, and removing Steam Lua Manifests. MIT licensed and Windows-focused."
+---
+
+Steamtools is a fast, open-source desktop application written in Rust that gives you a visual interface for managing Steam Lua Manifests. Instead of manually copying files into Steam's config directory, you load a `.lua` file and Steamtools handles the rest — displaying your manifests as a browsable game grid complete with Steam header images.
+
+## What problems it solves
+
+Steam Lua Manifests live inside `Steam\config\stplug-in\` and must be named by app ID (e.g. `480.lua`). Managing them by hand means navigating the filesystem, tracking which manifests are loaded, and remembering app IDs. Steamtools brings all of that into one window.
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="Visual game grid" icon="grid-2">
+    Browse your loaded manifests as cards with Steam header art fetched automatically from the Steam store.
+  </Card>
+  <Card title="Load Lua manifests" icon="file-code">
+    Pick any `.lua` file from a dialog — Steamtools copies it into the correct Steam config directory.
+  </Card>
+  <Card title="Install and uninstall" icon="circle-plus">
+    Trigger Steam's native install or uninstall flow for any manifest directly from the app.
+  </Card>
+  <Card title="Search by name or ID" icon="magnifying-glass">
+    Filter your manifest library by game name or Steam app ID using the built-in search bar.
+  </Card>
+  <Card title="Lua plugin system" icon="plug">
+    Write and run Lua plugins with a built-in code editor that includes syntax highlighting.
+  </Card>
+  <Card title="MelonLoader support" icon="puzzle-piece">
+    Download MelonLoader and install mod DLLs into your game directory from within the app.
+  </Card>
+</CardGroup>
+
+## Platform support
+
+Steamtools is a **Windows-only** application. It reads your Steam installation path from the Windows registry automatically, so setup requires nothing more than pointing it at your Steam folder on first launch.
+
+## License
+
+Steamtools is released under the [MIT license](https://github.com/RealViper8/Steamtools/blob/main/LICENSE). The author is not responsible for any actions taken using this program.
+
+<Note>
+  Ready to get the app running? Head to the installation guide next.
+</Note>
+
+<Card title="Install Steamtools" icon="download" href="/installation">
+  Download `stcli.exe` and install the required prerequisites on Windows.
+</Card>

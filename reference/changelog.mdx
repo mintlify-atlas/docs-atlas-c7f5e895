@@ -1,0 +1,69 @@
+---
+title: "Steamtools Version History, Changelog, and Roadmap"
+description: "A history of Steamtools releases from v0.2.1 through the current version, plus a look at features planned for upcoming releases on GitHub."
+---
+
+Steamtools is actively developed and released on GitHub. This page summarizes the major milestones in the version history and documents what is planned for upcoming releases. For the full list of tagged releases and attached binaries, visit the [GitHub Releases page](https://github.com/RealViper8/Steamtools/releases).
+
+## Current release
+
+### v0.6.3 — Latest
+
+The current stable release. Includes all features listed below under completed milestones, including the code editor with Lua syntax highlighting, search bar, MelonLoader mod support, Lua plugin support, and all core manifest tools (Install, Remove, Uninstall, View).
+
+## Version history
+
+### v0.5.1 — GUI rework
+
+A significant redesign of the main interface. The visual layout of the game grid, toolbar, and side panel were reworked to improve usability and spacing. This release introduced the current card-based manifest grid with Steam header images.
+
+Key additions in this period:
+- Search bar for filtering manifests by name or app ID
+- Settings window with experimental feature toggles for Mods and Plugins
+- MelonLoader mod support (experimental)
+- Lua plugin support with basic single-script execution
+- Built-in code editor with Lua syntax highlighting (powered by Tree-sitter)
+
+### v0.2.1 — Initial GUI release
+
+The first public release of the Steamtools graphical interface. Introduced the core manifest viewer and established the foundation for manifest management.
+
+Key additions in this period:
+- Visual manifest grid
+- Install tool — download a Lua Manifest by app ID from ManifestHub
+- Remove tool — delete a manifest from `config/stplug-in`
+- Uninstall tool — trigger Steam's uninstall flow for a game
+- View tool — display game details for a selected manifest
+- Header images for manifests using Steam's CDN artwork
+
+## Planned features
+
+The following items are on the roadmap and not yet released. They are subject to change.
+
+<AccordionGroup>
+  <Accordion title="Moving Mod and Plugins buttons for more space">
+    The **Mods** and **Plugins** buttons in the toolbar will be repositioned to free up horizontal space in the top bar and make room for additional controls.
+  </Accordion>
+
+  <Accordion title="Improved Settings: Start, Restart, Close Steam">
+    The Settings window will gain direct Steam process controls — buttons to start Steam, restart it, or shut it down — without needing to use the Steam tray icon or Task Manager.
+  </Accordion>
+
+  <Accordion title="Better visuals">
+    General visual polish across the interface, including improved theming and layout refinements.
+  </Accordion>
+
+  <Accordion title="Multiple simultaneous Lua script execution">
+    Currently only one Lua plugin script can run at a time. A future release will allow multiple scripts to run concurrently on separate threads.
+  </Accordion>
+</AccordionGroup>
+
+## Release notes
+
+Full release notes, including download links for each version's binary, are available on the GitHub Releases page:
+
+[https://github.com/RealViper8/Steamtools/releases](https://github.com/RealViper8/Steamtools/releases)
+
+<Note>
+  Steamtools is under active development. New features and fixes are released irregularly. Watch the GitHub repository to be notified of new releases.
+</Note>

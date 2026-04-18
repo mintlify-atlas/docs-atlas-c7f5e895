@@ -1,0 +1,54 @@
+---
+title: 'Remove Lua Manifests and Uninstall Games in Steamtools'
+description: 'Understand the difference between removing a Lua Manifest and uninstalling a game, and follow step-by-step instructions for each action in Steamtools.'
+---
+
+Steamtools exposes two distinct actions for removing a game from your setup: **Remove** and **Uninstall**. They do different things — it is important to understand which one you want before proceeding.
+
+| Action | What it does |
+|---|---|
+| **Remove** | Deletes the `.lua` manifest file from `config\stplug-in\` and removes the cached icon. The game disappears from Steamtools. |
+| **Uninstall** | Opens Steam via `steam://uninstall/<appid>` and prompts Steam to remove the game's installed files from your drive. The manifest file is not touched. |
+
+## Removing a manifest
+
+Removing a manifest revokes the game from your Steamtools list. The `.lua` file is permanently deleted from disk.
+
+<Warning>
+  Remove is not reversible from within Steamtools. Once the manifest file is deleted, you must re-download it from ManifestHub using the **↓ Install** button if you want the game back.
+</Warning>
+
+<Steps>
+  <Step title="Select a game card">
+    Click any game card in the Main Menu. The right panel updates to show the selected game's name and App ID.
+  </Step>
+  <Step title="Click Remove">
+    Click **Remove** in the right panel. Steamtools immediately deletes two files:
+
+    - `<SteamPath>\config\stplug-in\<appid>.lua` — the manifest file
+    - `icons\<appid>.jpg` — the cached header image
+  </Step>
+  <Step title="Game list updates">
+    The game card disappears from the Main Menu. The right panel resets to an empty state.
+  </Step>
+</Steps>
+
+## Uninstalling a game
+
+Uninstalling removes the game's data files from your drive. The manifest is not affected, so the game card remains in Steamtools.
+
+<Note>
+  The **🗑 Uninstall** button uses the `steam://uninstall/<appid>` protocol URL. Steamtools passes this URL to Windows via `cmd /C start steam://uninstall/<appid>`, which opens Steam and triggers its built-in uninstall dialog.
+</Note>
+
+<Steps>
+  <Step title="Select a game card">
+    Click the game card for the game you want to uninstall. The right panel shows the game's details.
+  </Step>
+  <Step title="Confirm the game is installed">
+    The **🗑 Uninstall** button is only shown when the game is detected as installed (Steamtools found an `appmanifest_<appid>.acf` file in your `steamapps\` directory). If the button is not visible, the game files are not present on your machine.
+  </Step>
+  <Step title="Click Uninstall">
+    Click **🗑 Uninstall**. Steam opens and presents its standard uninstall confirmation. Follow the Steam prompts to complete the process.
+  </Step>
+</Steps>

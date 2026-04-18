@@ -1,0 +1,31 @@
+---
+title: "Steamtools Settings Screen: Enable Experimental Features"
+description: "Access the Settings screen to toggle experimental Mods and Plugins features. Settings are persisted automatically across sessions using eframe storage."
+---
+
+The Settings screen is the control panel for optional and experimental Steamtools features. Currently it exposes two checkboxes that show or hide the **Mods** and **Plugins** toolbar buttons. Your choices are saved automatically and restored the next time you launch the application.
+
+## Open Settings
+
+Click the **⚙** button in the top-right corner of the main toolbar. Steamtools switches from the Main Menu view to the Settings screen.
+
+## Available options
+
+| Setting | Default | Effect |
+|---------|---------|--------|
+| **Mods feature (Experimental)** | Off | Shows the **🔁 Mods** button in the toolbar |
+| **Plugins feature (Experimental)** | Off | Shows the **🔌 Plugins** button in the toolbar |
+
+Check a box to enable the corresponding feature. The toolbar updates immediately — you do not need to restart the application.
+
+<Note>
+Both features are marked **Experimental**. They may behave unexpectedly or change in future releases.
+</Note>
+
+## Return to the Main Menu
+
+Click **↩ Back** at the bottom of the Settings screen to return to the Main Menu.
+
+## Persistence
+
+Settings are saved via eframe's built-in storage mechanism (serialized as JSON). They persist across application restarts. If you update to a new version of Steamtools and the version changes, stored data is cleared and you will need to re-configure your settings.

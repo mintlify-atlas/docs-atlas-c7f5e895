@@ -1,0 +1,123 @@
+---
+title: "Troubleshoot Steamtools: Crashes, Display, and Manifests"
+description: "Solutions to the most common errors when installing or using Steamtools, including launch crashes, black screen, Steam path errors, and manifest issues."
+---
+
+If Steamtools isn't behaving as expected, the sections below cover the most common problems and how to fix them. Work through the relevant accordion for your issue, and check the log file if the problem isn't listed here.
+
+## Launch and display issues
+
+<AccordionGroup>
+  <Accordion title="Black screen or nothing renders on launch">
+    Steamtools uses the wgpu renderer, which requires OpenGL support from your GPU drivers. A black screen on startup almost always means your GPU drivers are missing or outdated.
+
+    **Fix:**
+    1. Download and install the latest drivers for your GPU:
+       - AMD: [https://www.amd.com/en/support/download/drivers.html](https://www.amd.com/en/support/download/drivers.html)
+       - NVIDIA: [https://www.nvidia.com/de-de/drivers/](https://www.nvidia.com/de-de/drivers/)
+    2. Restart your machine after the driver installation completes.
+    3. Launch Steamtools again.
+  </Accordion>
+
+  <Accordion title="Steamtools crashes immediately on launch">
+    An immediate crash on startup — before any window appears — is almost always caused by a missing Visual C++ Runtime.
+
+    **Fix:**
+    1. Download the Visual C++ Runtime x64: [https://aka.ms/vs/17/release/vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+    2. Run the installer and follow the prompts.
+    3. Restart your machine if prompted, then relaunch Steamtools.
+
+    See the [Prerequisites](/reference/prerequisites) page for full details.
+  </Accordion>
+</AccordionGroup>
+
+## Setup and Steam path issues
+
+<AccordionGroup>
+  <Accordion title='"Steam is not installed in X" error during setup'>
+    This error appears when you point Steamtools to a folder that does not contain `steam.exe`. The setup screen requires the **root Steam installation directory**, not a subfolder inside it.
+
+    **Fix:**
+    1. Open **File Explorer** and navigate to your Steam installation. The default location is `C:\Program Files (x86)\Steam`.
+    2. Confirm that `steam.exe` is present in that folder.
+    3. In the Steamtools **Setup** screen, click the path field to open a folder picker.
+    4. Select the folder that directly contains `steam.exe` (for example, `C:\Program Files (x86)\Steam`).
+    5. Click **Validate**. Steamtools will confirm the path is correct.
+  </Accordion>
+
+  <Accordion title="Setup screen appears again after an update">
+    When Steamtools updates to a new version, it clears its saved state and asks you to set the Steam path again. This is expected behavior.
+
+    **Fix:** Re-enter your Steam path on the Setup screen and click **Validate**. Your manifests and settings will be restored automatically once the path is confirmed.
+  </Accordion>
+</AccordionGroup>
+
+## Manifest installation issues
+
+<AccordionGroup>
+  <Accordion title="Couldn't find app in database or invalid appid">
+    This error means the app ID you entered was not found in ManifestHub, or the ID contains a typo.
+
+    **Fix:**
+    - Double-check the app ID on [SteamDB](https://www.steamdb.info/) or the Steam store page URL.
+    - Make sure the app ID contains **only digits** — no spaces, letters, or special characters.
+    - Verify that a manifest for this app ID exists on ManifestHub. Not every app ID has an available manifest.
+  </Accordion>
+
+  <Accordion title='"You already have the game/app!" error'>
+    A manifest for this app ID is already installed in your Steam `config/stplug-in` directory.
+
+    **Fix:** If you want to reinstall the manifest, use the **Remove** button on the existing entry first, then install again.
+  </Accordion>
+
+  <Accordion title="App ID format errors or .lua filename issues">
+    The app ID must be a numeric value only. The corresponding `.lua` file placed in `config/stplug-in` must be named with the app ID number — for example, `480.lua` for app ID 480.
+
+    **Fix:**
+    - When using **Load lua** to add a file manually, rename the file to match the app ID exactly before loading it (for example, rename `game.lua` to `480.lua`).
+    - When using the **Install** tool, enter only the numeric app ID in the input field.
+  </Accordion>
+</AccordionGroup>
+
+## Mods issues
+
+<AccordionGroup>
+  <Accordion title='"For now only local mods are supported..." message'>
+    The Mods feature only supports DLL files stored locally on your machine. Remote or URL-based mod loading is not yet implemented.
+
+    **Fix:**
+    1. Create a folder named `mods/` in the same directory as `stcli.exe`.
+    2. Place your `.dll` mod files inside the `mods/` folder.
+    3. Open the **Mods** panel in Steamtools and select your game.
+
+    <Note>
+      The **Mods** feature must be enabled first. Go to **Settings** and check **Mods feature (Experimental)**.
+    </Note>
+  </Accordion>
+</AccordionGroup>
+
+## Log files and diagnostics
+
+Steamtools writes a log file named `steamtools.log` in the same directory as `stcli.exe`. The log is only created in **release builds** — it is not written in debug builds.
+
+If you are experiencing a reproducible issue, the log file is the first place to look for error details. Open it in any text editor and look for lines tagged `ERROR` or `WARN`.
+
+<Tip>
+  If the log file does not exist, you are likely running a debug build. Download a release build from [GitHub Releases](https://github.com/RealViper8/Steamtools/releases) to enable logging.
+</Tip>
+
+## Reporting bugs
+
+If you cannot resolve your issue using this guide, open a bug report on GitHub Issues:
+
+[https://github.com/RealViper8/Steamtools/issues](https://github.com/RealViper8/Steamtools/issues)
+
+Include the following in your report:
+- Your Steamtools version (shown in the bottom-right of the main window)
+- Your Windows version
+- The contents of `steamtools.log` if it exists
+- Steps to reproduce the issue
+
+<Warning>
+  To report a **security vulnerability**, use GitHub Issues as well. Only versions 0.0.2 and above are actively supported. Versions below 0.2 do not receive security fixes.
+</Warning>

@@ -1,0 +1,83 @@
+---
+title: "Steamtools Lua Plugin System: Write and Run Scripts"
+description: "Run custom Lua scripts inside Steamtools with a built-in code editor, start/stop controls, and live file management — currently experimental."
+---
+
+The plugin system lets you write and execute Lua scripts directly inside Steamtools. Scripts live in a local `plugins/` directory and are managed through a dedicated popup with a syntax-highlighted code editor. The feature is experimental and must be enabled before use.
+
+<Warning>
+The Lua plugin system is experimental. Expect rough edges and be cautious when running untrusted scripts.
+</Warning>
+
+## Enable plugins
+
+Plugins are hidden by default. You must turn them on in Settings before the toolbar button appears.
+
+<Steps>
+  <Step title="Open Settings">
+    Click the **⚙** button in the top-right corner of the main toolbar.
+  </Step>
+  <Step title="Enable the feature">
+    Check **Plugins feature (Experimental)**. The **🔌 Plugins** button will appear in the toolbar immediately.
+  </Step>
+  <Step title="Return to the main view">
+    Click **↩ Back** to return to the Main Menu.
+  </Step>
+</Steps>
+
+## Open the Plugins panel
+
+Click **🔌 Plugins** in the toolbar. A popup window opens and scans the `plugins/` directory next to `stcli.exe`. If the directory does not exist, Steamtools creates it automatically.
+
+## Add a new plugin
+
+If no plugins are present, the popup shows an **Add new plugin** button. Click it to open a file-save dialog that defaults to the `plugins/` directory with `plugin.lua` pre-filled as the filename. Confirm to create an empty `.lua` file. Close and reopen the popup to see the new entry.
+
+You can also drop `.lua` files directly into the `plugins/` folder on disk — reopen the popup to pick them up.
+
+## Start and stop a plugin
+
+Each plugin card in the list shows three controls:
+
+| Button | Action |
+|--------|--------|
+| **Start** | Resets the execution flag, then runs `./plugins/<name>.lua` on a background thread |
+| **Stop** | Sets a flag that interrupts the running script |
+| **View/Edit** | Opens the code editor for that plugin |
+
+<Warning>
+Only one plugin can run at a time. Starting a second plugin while another is running is not yet supported. Support for multiple concurrent scripts on separate threads is planned for a future release.
+</Warning>
+
+## Edit a plugin
+
+Click **View/Edit** on any plugin card to open the **Code Editor** window. The editor uses Lua syntax highlighting with the GitHub Dark color theme.
+
+<Steps>
+  <Step title="Edit the code">
+    Type or paste your Lua code in the editor area.
+  </Step>
+  <Step title="Rename (optional)">
+    Edit the name in the text field at the top of the editor. The filename on disk updates when you save.
+  </Step>
+  <Step title="Save your changes">
+    Press **Ctrl+S** or click **Save**. Steamtools renames the file if you changed the name, then writes the updated contents to `./plugins/<name>.lua`.
+  </Step>
+  <Step title="Delete (optional)">
+    Click the **🗑** button in the editor toolbar to permanently delete the plugin file from disk.
+  </Step>
+</Steps>
+
+## Plugin directory
+
+All scripts are stored in the `plugins/` directory relative to the Steamtools executable:
+
+```
+steamtools/
+├── stcli.exe
+└── plugins/
+    ├── my_script.lua
+    └── another_script.lua
+```
+
+File names must use the `.lua` extension. The display name shown in the panel is the file stem (the part before `.lua`).

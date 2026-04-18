@@ -1,80 +1,82 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: "Steamtools Quickstart: First Run to Managing Manifests"
+description: "Launch stcli.exe, configure your Steam path, load your first Lua manifest, and start browsing and managing your game manifest library."
 ---
 
-## Get started in three steps
+This guide walks you through launching Steamtools for the first time and performing the most common tasks: loading a Lua manifest, browsing your library, and acting on a game.
 
-Get your documentation site running locally and make your first customization.
+<Steps>
+  <Step title="Launch stcli.exe">
+    Double-click `stcli.exe`. The app opens to the **Setup** screen on the very first run — or any time the stored Steam path can no longer be found.
+  </Step>
 
-### Step 1: Set up your local environment
+  <Step title="Set your Steam path">
+    On Windows, Steamtools reads the Steam installation path from the registry automatically. The path field is pre-filled with the value found under `HKLM\SOFTWARE\WOW6432Node\Valve\Steam`.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    If the field is empty or incorrect, type the path manually or click the field to open a folder picker. The default Steam location is:
 
-### Step 2: Deploy your changes
+    ```text
+    C:\Program Files (x86)\Steam
+    ```
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    Once the path is filled in, click **Validate**. Steamtools checks that `steam.exe` exists at that location. If the check passes, a confirmation dialog appears and the app moves to the **Main Menu**. If it fails, correct the path and try again.
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    <Note>
+      The path must point to the Steam installation folder itself — the one that contains `steam.exe` — not a subfolder inside it.
+    </Note>
+  </Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+  <Step title="Explore the main menu">
+    After validation you land on the **Main Menu**. The central panel shows a scrollable grid of game cards. Each card displays the Steam header image for that app ID. The right panel shows actions for whichever card you have selected.
 
-### Step 3: Go live
+    If the grid is empty, no `.lua` files are present in `Steam\config\stplug-in\` yet. Load one in the next step.
+  </Step>
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+  <Step title="Load a Lua manifest">
+    Click **Load lua** in the toolbar. A file picker opens filtered to `.lua` files. Select one or more manifest files and confirm.
+
+    Steamtools copies each file into `Steam\config\stplug-in\` using the file's stem as the name. The stem must be the Steam App ID of the game — for example, a file named `480.lua` maps to app ID `480` (Portal).
+
+    After loading, the game grid refreshes automatically and fetches header images from the Steam store API.
+
+    <Warning>
+      Name your `.lua` files by their Steam App ID (e.g. `480.lua`). Files with non-numeric names are skipped and logged as errors.
+    </Warning>
+  </Step>
+
+  <Step title="Search your library">
+    Use the search bar at the top of the window to filter the game grid by name or app ID. Type a game name to match by prefix, or type a numeric app ID for an exact match.
+
+    <Tip>
+      Press **Tab** anywhere in the app to jump focus directly to the search bar without reaching for the mouse.
+    </Tip>
+
+    Click the **✕** button next to the search bar to clear the filter and show all manifests again.
+  </Step>
+
+  <Step title="Act on a game">
+    Click any game card in the grid to select it. The right panel updates with the game's name and app ID, and shows the available actions:
+
+    - **View** — Opens a popup showing the game's App ID details.
+    - **Install** — Triggers Steam's native install dialog for the selected app ID (only shown when the game is not installed).
+    - **Uninstall** — Triggers Steam's native uninstall dialog (only shown when the game is installed).
+    - **Remove** — Deletes the `.lua` manifest file from `Steam\config\stplug-in\` and removes the game card from the grid.
+  </Step>
+</Steps>
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
-
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Manifest management" icon="file-code" href="/guides/manifest-management">
+    Learn how Lua Manifests work and how Steamtools organises them.
+  </Card>
+  <Card title="Installing games" icon="circle-plus" href="/guides/installing-games">
+    Download manifests by app ID using the built-in install tool.
+  </Card>
+  <Card title="Lua plugins" icon="plug" href="/features/plugins">
+    Write and run Lua scripts with the built-in code editor.
+  </Card>
+  <Card title="Settings" icon="gear" href="/features/settings">
+    Enable experimental features like Mods and Plugins from the Settings screen.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
